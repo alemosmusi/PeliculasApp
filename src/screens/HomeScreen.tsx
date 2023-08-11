@@ -21,7 +21,7 @@ LogBox.ignoreLogs(['ViewPropTypes will be removed']);
 const windowWidth = Dimensions.get('window').width;
 
 const HomeScreen = () => {
-  const {peliculasEnCine, isLoading} = useMovies();
+  const {nowPlaying, popular, topRated, upcoming, isLoading} = useMovies();
   const {top} = useSafeAreaInsets();
 
   if (isLoading) {
@@ -40,7 +40,7 @@ const HomeScreen = () => {
             height: 440,
             }}>
             <Carousel
-            data={peliculasEnCine}
+            data={nowPlaying}
             renderItem={({item}: any) => <MoviePoster movie={item} />}
             sliderWidth={windowWidth}
             itemWidth={300}
@@ -48,9 +48,9 @@ const HomeScreen = () => {
             />
         </View>
 
-        <HorizontalSlider title='En cine' movies={peliculasEnCine}/>
-        <HorizontalSlider movies={peliculasEnCine}/>
-        <HorizontalSlider title='En cine' movies={peliculasEnCine}/>
+        <HorizontalSlider title='Popular' movies={popular}/>
+        <HorizontalSlider title='Top Rated' movies={topRated}/>
+        <HorizontalSlider title='Upcoming' movies={upcoming}/>
         </View>
 
     </ScrollView>
