@@ -14,6 +14,7 @@ import MoviePoster from '../components/MoviePoster';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Carousel from 'react-native-snap-carousel';
+import HorizontalSlider from '../components/HorizontalSlider';
 
 LogBox.ignoreLogs(['ViewPropTypes will be removed']);
 
@@ -43,21 +44,13 @@ const HomeScreen = () => {
             renderItem={({item}: any) => <MoviePoster movie={item} />}
             sliderWidth={windowWidth}
             itemWidth={300}
+            inactiveSlideOpacity={0.9}
             />
         </View>
 
-        <View style={{backgroundColor: 'red', height: 260}}>
-            <Text style={{fontSize: 30, fontWeight: 'bold'}}>En cine</Text>
-            <FlatList 
-                data= {peliculasEnCine}
-                renderItem={({item}:any)=> 
-                    <MoviePoster movie={item} width={140} height={200}/>
-                }
-                keyExtractor={(item)=> item.id.toString()}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-            />
-        </View>
+        <HorizontalSlider title='En cine' movies={peliculasEnCine}/>
+        <HorizontalSlider movies={peliculasEnCine}/>
+        <HorizontalSlider title='En cine' movies={peliculasEnCine}/>
         </View>
 
     </ScrollView>
