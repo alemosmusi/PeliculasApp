@@ -13,7 +13,7 @@ interface Props {
 const MoviePoster = ({movie, height = 420, width = 300}: Props) => {
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
-  const navigation= useNavigation();
+  const navigation= useNavigation() as any;
 
 
 
@@ -24,7 +24,9 @@ const MoviePoster = ({movie, height = 420, width = 300}: Props) => {
       style={{
         width,
         height,
-        marginHorizontal: 8
+        marginHorizontal: 8,
+        paddingBottom: 20,
+        paddingHorizontal: 7
       }}>
       <View style={styles.imageContainer}>
         <Image source={{uri}} style={styles.image} />
