@@ -1,59 +1,57 @@
-import { StackScreenProps } from '@react-navigation/stack'
-import React from 'react'
-import { Image, Text, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { RootStackParams } from '../navigation/Navigation'
+import {StackScreenProps} from '@react-navigation/stack';
+import React from 'react';
+import {
+  Image,
+  Text,
+  View,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
+import {RootStackParams} from '../navigation/Navigation';
 
-const screenHeight = Dimensions.get('screen').height 
+import Icon from 'react-native-vector-icons/Ionicons'
 
-interface Props extends StackScreenProps<RootStackParams,'DetailScreen'>{};
-    
+const screenHeight = Dimensions.get('screen').height;
+
+interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> {}
+
 const DetailScreen = ({route}: Props) => {
+  const movie = route.params;
 
+  const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
-    const movie = route.params;
-
-    const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-
-    
-    
-
-
-
-   return (
-
+  return (
     <ScrollView>
-
-       <View style={styles.imageContainer}>
-           <Image 
-            source={{uri}}
-            style={styles.posterImage}
-           />
-       </View>
-
-
-        <View style={styles.marginContainer}>
-       <Text style={styles.subTitle}>
-            {movie.original_title}
-       </Text>
-       <Text style={styles.title}>
-            {movie.title}
-       </Text>
-
+      <View style={styles.imageContainer}>
+        <View style={styles.imageBorder}>
+        <Image source={{uri}} style={styles.posterImage} />
         </View>
-    </ScrollView>
-)
-}
+      </View>
 
+      <View style={styles.marginContainer}>
+        <Text style={styles.subTitle}>{movie.original_title}</Text>
+        <Text style={styles.title}>{movie.title}</Text>
+      </View>
+      <View style={styles.marginContainer}>
+        <Icon 
+         name="star-outline"
+         color='grey'
+         size={20}
+        />
+      </View>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
-    imageContainer:{
-        overflow: 'hidden',
-        width: '100%',
-        height: screenHeight * 0.7,
-        shadowColor: "#000",
+  imageContainer: {
+    width: '100%',
+    height: screenHeight * 0.7,
+    shadowColor: '#000',
     shadowOffset: {
-        width: 0,
-        height: 10,
+      width: 0,
+      height: 10,
     },
     shadowOpacity: 0.24,
     shadowRadius: 7,
@@ -61,26 +59,29 @@ const styles = StyleSheet.create({
     elevation: 10,
 
     borderBottomEndRadius: 25,
-    borderBottomStartRadius: 25
-    },
-    posterImage:{
-        flex:1,
-    },
-    marginContainer:{
-        marginHorizontal: 20,
-        marginTop: 20
-    },
-    subTitle:{
-        fontSize: 16,
-        opacity: 0.8
-    },
-    title:{
-        fontSize: 20,
-        fontWeight: 'bold'
-    }
+    borderBottomStartRadius: 25,
+  },
+  imageBorder:{
+    flex:1,
+    overflow: 'hidden',
+    borderBottomEndRadius: 25,
+    borderBottomStartRadius: 25,
+  },
+  posterImage: {
+    flex: 1,
+  },
+  marginContainer: {
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
+  subTitle: {
+    fontSize: 16,
+    opacity: 0.8,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 });
 
-    
-export default DetailScreen
-
-
+export default DetailScreen;
