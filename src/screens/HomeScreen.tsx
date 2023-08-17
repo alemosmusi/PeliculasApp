@@ -15,6 +15,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Carousel from 'react-native-snap-carousel';
 import HorizontalSlider from '../components/HorizontalSlider';
+import GradientBackground from '../components/GradientBackground';
 
 LogBox.ignoreLogs(['ViewPropTypes will be removed']);
 
@@ -33,6 +34,8 @@ const HomeScreen = () => {
   }
 
   return (
+    <GradientBackground>
+
     <ScrollView>
         <View style={{marginTop: top + 20}}>
         <View
@@ -54,6 +57,7 @@ const HomeScreen = () => {
         </View>
 
     </ScrollView>
+    </GradientBackground>
   );
 };
 
