@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Dimensions,
@@ -9,6 +9,11 @@ import {
   Text,
   View,
 } from 'react-native';
+
+
+import ImageColors from 'react-native-image-colors'
+
+
 import {useMovies} from '../hooks/useMovies';
 import MoviePoster from '../components/MoviePoster';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -16,6 +21,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
 import HorizontalSlider from '../components/HorizontalSlider';
 import GradientBackground from '../components/GradientBackground';
+import { getImageColors } from '../helpers/getColores';
 
 LogBox.ignoreLogs(['ViewPropTypes will be removed']);
 
@@ -24,6 +30,23 @@ const windowWidth = Dimensions.get('window').width;
 const HomeScreen = () => {
   const {nowPlaying, popular, topRated, upcoming, isLoading} = useMovies();
   const {top} = useSafeAreaInsets();
+
+
+  const getPosterColors = async (index:number)=>{
+
+    const movie = nowPlaying[index]
+    const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+    
+    const [primary, secondary ] = await getImageColors(uri)
+
+
+
+    console.log({primary, secondary})
+
+
+  }
+
 
   if (isLoading) {
     return (
@@ -48,6 +71,7 @@ const HomeScreen = () => {
             sliderWidth={windowWidth}
             itemWidth={300}
             inactiveSlideOpacity={0.9}
+            onSnapToItem={(index) => getPosterColors(index)}
             />
         </View>
 
